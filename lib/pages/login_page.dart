@@ -7,10 +7,15 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Color(0xffF2F2F2),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const _Logo(),
 
             _From(),
+
+            _Labels(),
+
+           const Text('Terms and conditions of use', style: TextStyle(fontWeight: FontWeight.w200)),
           ],
         ),
       ),
@@ -26,6 +31,7 @@ class _Logo extends StatelessWidget {
     return Center(
       child: Container(
         width: 170,
+        margin: const EdgeInsets.only(top: 50),
         child: const Column(
           children: <Widget>[
             Image(
@@ -71,6 +77,21 @@ class __FromState extends State<_From> {
   }
 }
 
+class _Labels extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        children: <Widget>[
+          Text('Do not have an account?', style: TextStyle(color: Colors.black54, fontSize: 15)),
+          SizedBox(height: 10),
+          Text('Create one now!', style: TextStyle(color: Colors.blue[600], fontSize: 18, fontWeight: FontWeight.bold)),
+        ],
+      );
+    
+  }
+}
+
 class CustomInput extends StatelessWidget {
   final IconData icon;
   final String placeholder;
@@ -108,7 +129,8 @@ class BlueButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        elevation: 2,
+        elevation: 2, 
+        backgroundColor: Colors.blue,
         shape: const StadiumBorder(),
       ),
       child: Container(
@@ -117,7 +139,7 @@ class BlueButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(color: Colors.white, fontSize: 17),
+            style: TextStyle(color: Colors.white, fontSize: 17),
           ),
         ),
       ),

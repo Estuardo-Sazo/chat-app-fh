@@ -12,9 +12,9 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const _Logo(),
+            const Logo(),
             _From(),
-            _Labels(),
+            const Labels(),
             const Text('Terms and conditions of use',
                 style: TextStyle(fontWeight: FontWeight.w200)),
           ],
@@ -24,29 +24,6 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class _Logo extends StatelessWidget {
-  const _Logo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 170,
-        margin: const EdgeInsets.only(top: 50),
-        child: const Column(
-          children: <Widget>[
-            Image(
-              image: AssetImage('assets/tag-logo.png'),
-            ),
-            SizedBox(height: 100),
-            Text('Messenger',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class _From extends StatefulWidget {
   @override
@@ -83,24 +60,6 @@ class __FromState extends State<_From> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _Labels extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text('Do not have an account?',
-            style: TextStyle(color: Colors.black54, fontSize: 15)),
-        SizedBox(height: 10),
-        Text('Create one now!',
-            style: TextStyle(
-                color: Colors.blue[600],
-                fontSize: 18,
-                fontWeight: FontWeight.bold)),
-      ],
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/widgets.dart';
 
@@ -11,12 +13,10 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const _Logo(),
-
             _From(),
-
             _Labels(),
-
-           const Text('Terms and conditions of use', style: TextStyle(fontWeight: FontWeight.w200)),
+            const Text('Terms and conditions of use',
+                style: TextStyle(fontWeight: FontWeight.w200)),
           ],
         ),
       ),
@@ -49,12 +49,13 @@ class _Logo extends StatelessWidget {
 }
 
 class _From extends StatefulWidget {
-
   @override
   State<_From> createState() => __FromState();
 }
 
 class __FromState extends State<_From> {
+  final emailCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,9 +63,18 @@ class __FromState extends State<_From> {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         children: <Widget>[
-          const CustomInput(),
-          const CustomInput(),
-          
+          CustomInput(
+            icon: Icons.mail_outline,
+            placeholder: 'Correo',
+            keyboardType: TextInputType.emailAddress,
+            textController: emailCtrl,
+          ),
+          CustomInput(
+            icon: Icons.lock_outline,
+            placeholder: 'Contraseña',
+            textController: passwordCtrl,
+            isPassword: true,
+          ),
 
           //TODO Crear boton
           BlueButton(
@@ -78,17 +88,20 @@ class __FromState extends State<_From> {
 }
 
 class _Labels extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: <Widget>[
-          Text('Do not have an account?', style: TextStyle(color: Colors.black54, fontSize: 15)),
-          SizedBox(height: 10),
-          Text('Create one now!', style: TextStyle(color: Colors.blue[600], fontSize: 18, fontWeight: FontWeight.bold)),
-        ],
-      );
-    
+      children: <Widget>[
+        Text('Do not have an account?',
+            style: TextStyle(color: Colors.black54, fontSize: 15)),
+        SizedBox(height: 10),
+        Text('Create one now!',
+            style: TextStyle(
+                color: Colors.blue[600],
+                fontSize: 18,
+                fontWeight: FontWeight.bold)),
+      ],
+    );
   }
 }
 
@@ -103,7 +116,7 @@ class BlueButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        elevation: 2, 
+        elevation: 2,
         backgroundColor: Colors.blue,
         shape: const StadiumBorder(),
       ),

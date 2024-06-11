@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:chat_app/widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -57,16 +58,15 @@ class __FromState extends State<_From> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         children: <Widget>[
-          const CustomInput(
-            icon: Icons.mail_outline,
-            placeholder: 'Email',
-          ),
-         const CustomInput(
-            icon: Icons.lock_outline,
-            placeholder: 'Password',
-          ),
+          const CustomInput(),
+          const CustomInput(),
+          
+
+          //TODO Crear boton
           BlueButton(
             text: 'Enter',
             onPressed: () {},
@@ -89,32 +89,6 @@ class _Labels extends StatelessWidget {
         ],
       );
     
-  }
-}
-
-class CustomInput extends StatelessWidget {
-  final IconData icon;
-  final String placeholder;
-
-  const CustomInput({super.key, required this.icon, required this.placeholder});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 50),
-      margin: const EdgeInsets.only(bottom: 20),
-      child: TextField(
-        autocorrect: false,
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          prefixIcon: Icon(icon),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
-          ),
-          labelText: placeholder,
-        ),
-      ),
-    );
   }
 }
 

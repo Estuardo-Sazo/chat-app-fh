@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/widgets.dart';
 
@@ -54,9 +52,12 @@ class __FromState extends State<_From> {
           ),
 
           //TODO Crear boton
-          BlueButton(
-            text: 'Enter',
-            onPressed: () {},
+          BtnCustom(
+            textBtn: 'Ingrese',
+            onPressed: () {
+              print(emailCtrl.text);
+              print(passwordCtrl.text);
+            },
           ),
         ],
       ),
@@ -64,31 +65,3 @@ class __FromState extends State<_From> {
   }
 }
 
-class BlueButton extends StatelessWidget {
-  final String text;
-  final void Function() onPressed;
-
-  const BlueButton({super.key, required this.text, required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        elevation: 2,
-        backgroundColor: Colors.blue,
-        shape: const StadiumBorder(),
-      ),
-      child: Container(
-        width: double.infinity,
-        height: 55,
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(color: Colors.white, fontSize: 17),
-          ),
-        ),
-      ),
-    );
-  }
-}

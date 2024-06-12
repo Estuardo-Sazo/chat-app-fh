@@ -14,10 +14,16 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Logo(),
+                const Logo(
+                  title: 'Messenger',
+                ),
                 _From(),
-                const Labels(),
-                const Text('Terms and conditions of use',
+                const Labels(
+                  route: 'register',
+                  title1: 'No tienes una cuenta?',
+                  title2: 'Crear cuenta!',
+                ),
+                const Text('Terminos y condiciones de uso',
                     style: TextStyle(fontWeight: FontWeight.w200)),
               ],
             ),
@@ -27,7 +33,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
 
 class _From extends StatefulWidget {
   @override
@@ -70,4 +75,3 @@ class __FromState extends State<_From> {
     );
   }
 }
-

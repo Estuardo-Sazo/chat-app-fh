@@ -5,17 +5,23 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF2F2F2),
+      backgroundColor: const Color(0xffF2F2F2),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Logo(),
-            _From(),
-            const Labels(),
-            const Text('Terms and conditions of use',
-                style: TextStyle(fontWeight: FontWeight.w200)),
-          ],
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.9,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Logo(),
+                _From(),
+                const Labels(),
+                const Text('Terms and conditions of use',
+                    style: TextStyle(fontWeight: FontWeight.w200)),
+              ],
+            ),
+          ),
         ),
       ),
     );

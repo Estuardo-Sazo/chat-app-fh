@@ -18,7 +18,7 @@ class BtnCustom extends StatelessWidget {
         shape: const StadiumBorder(),
         backgroundColor: Colors.blue,
       ),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: 55,
         child:  Center(

@@ -6,16 +6,11 @@ class ChatPage extends StatefulWidget {
   State<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
 
-  List<ChatMessage> _messages = [
-    ChatMessage(uid: '123', text: 'Hola Mundo'),
-    ChatMessage(uid: '2343', text: 'Hola Tierra'),
-    ChatMessage(uid: '123', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'),
-    ChatMessage(uid: '2343', text: 'Hola Tierra'),
-  ] ;
+  List<ChatMessage> _messages = [];
   bool _estaEscribiendo = false;
 
   @override
@@ -43,7 +38,7 @@ class _ChatPageState extends State<ChatPage> {
             children: <Widget>[
               Flexible(
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (_, i) => _messages[i],
                   itemCount: _messages.length,
                   reverse: true,
@@ -107,11 +102,17 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   _handleSubmitted(String text) {
+    if (text.isEmpty) return;
     _textController.clear();
     _focusNode.requestFocus();
 
-    final newMessage = ChatMessage(uid: '123', text: text);
+    final newMessage = ChatMessage(
+        uid: '123',
+        text: text,
+        animationController: AnimationController(
+            vsync: this, duration: const Duration(milliseconds: 400)));
     _messages.insert(0, newMessage);
+    newMessage.animationController.forward();
     setState(() {
       _estaEscribiendo = false;
     });

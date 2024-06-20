@@ -1,14 +1,28 @@
 import 'dart:convert';
 
 import 'package:chat_app/global/environment.dart';
+import 'package:chat_app/models/login_respose.dart';
+import 'package:chat_app/models/user.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
 class AuthService with ChangeNotifier {
+
+  User? user;
+  bool _authenticating = false;
+
+  bool get authenticating => _authenticating;
+  set authenticating(bool value){
+    _authenticating = value;
+    notifyListeners();
+  }
   
 
-  Future login(String email, String password) async {
+  Future<bool> login(String email, String password) async {
+
+    authenticating = true;
+
     final data = {
       'email': email,
       'password': password,
@@ -20,7 +34,18 @@ class AuthService with ChangeNotifier {
           'Content-Type': 'application/json',
         });
 
-        print(resp.body);
+        authenticating = false;
+
+        if(resp.statusCode == 200){
+          final loginResponse = loginResponseFromJson(resp.body);
+          user = loginResponse.user;
+
+          return true;
+
+        }else{
+          return false;
+        }
+
 
 
   }

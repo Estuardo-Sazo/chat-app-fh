@@ -1,5 +1,7 @@
+import 'package:chat_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -68,6 +70,9 @@ class __FromState extends State<_From> {
             onPressed: () {
               print(emailCtrl.text);
               print(passwordCtrl.text);
+              final authService =
+                  Provider.of<AuthService>(context, listen: false);
+              authService.login(emailCtrl.text, passwordCtrl.text);
             },
           ),
         ],

@@ -77,6 +77,9 @@ class __FromState extends State<_From> {
                         emailCtrl.text.trim(), passwordCtrl.text.trim());
                     if (loginOk) {
                       //TODO Navegar a otra pantalla
+                      Navigator.pushReplacementNamed(context, 'users');
+
+                      //TODO conectar socket server
                     } else {
                       //TODO Mostrar alerta
                       mostrarAlerta(context, 'Login incorrecto',

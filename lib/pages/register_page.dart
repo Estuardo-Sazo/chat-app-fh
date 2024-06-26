@@ -1,5 +1,8 @@
+import 'package:chat_app/helpers/mostrar_alerta.dart';
+import 'package:chat_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
   @override
@@ -10,7 +13,7 @@ class RegisterPage extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.9,
+            height: MediaQuery.of(context).size.height * 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -45,6 +48,7 @@ class __FromState extends State<_From> {
   final passwordCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Container(
       margin: const EdgeInsets.only(top: 40),
       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -72,10 +76,22 @@ class __FromState extends State<_From> {
           //TODO Crear boton
           BtnCustom(
             textBtn: 'Ingrese',
-            onPressed: () {
-              print(emailCtrl.text);
-              print(passwordCtrl.text);
-            },
+            onPressed: authService.authenticating
+                ? () => {}
+                : () async {
+                    FocusScope.of(context).unfocus();
+                    final registerOk = await authService.register(
+                        nameCtrl.text.trim(),
+                        emailCtrl.text.trim(),
+                        passwordCtrl.text.trim());
+                    if (registerOk == true) {
+                      Navigator.pushReplacementNamed(context, 'users');
+                    } else {
+                      //Mostrar alerta
+                      mostrarAlerta(context, 'Registro Incorrecto',
+                          'Revise sus credenciales nuevamente: '+ registerOk);
+                    }
+                  },
           ),
         ],
       ),
